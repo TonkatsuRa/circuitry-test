@@ -8,6 +8,7 @@ import { COMPONENTS } from './config.js';
 import { createScene } from './scene.js';
 import { buildCPU, buildChip } from './components.js';
 import { TracePath } from './paths.js';
+import { buildAmbientCircuitry } from './circuitry.js';
 import {
   InteractionController, PopupController, startHUDClock
 } from './ui.js';
@@ -18,6 +19,11 @@ const { renderer, scene, camera } = createScene(mount);
 /* ─── BUILD CPU ───────────────────────────────────────── */
 const cpu = buildCPU();
 scene.add(cpu);
+
+/* ─── AMBIENT CIRCUITRY ───────────────────────────────── */
+// Decorative dense PCB detail underneath the interactive main paths.
+const ambient = buildAmbientCircuitry();
+scene.add(ambient);
 
 /* ─── BUILD CHIPS + PATHS ─────────────────────────────── */
 const chipMeshes     = {};

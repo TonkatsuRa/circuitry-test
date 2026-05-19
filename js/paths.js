@@ -70,7 +70,7 @@ export class TracePath {
         uProgress:     { value: 0 },
         uTotalLength:  { value: this.totalLength },
         uTime:         { value: 0 },
-        uColorBase:    { value: new THREE.Color(PALETTE.traceBase) },
+        uColorBase:    { value: new THREE.Color(PALETTE.traceMainBase) },
         uColorLit:     { value: new THREE.Color(PALETTE.traceLit) },
         uAmbientPulse: {
           value: SCENE_CONFIG.enableAmbientPulse ? 1.0 : 0.0,
@@ -81,7 +81,7 @@ export class TracePath {
     });
 
     this.mesh = buildPathGroup(this.waypoints, this.material);
-    this.mesh.position.y = 0.001;
+    this.mesh.position.y = 0.04;  // sit above ambient circuitry (which is at y ~0.018)
 
     this.progress = 0;
     this._anim    = null;

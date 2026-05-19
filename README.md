@@ -44,9 +44,10 @@ styles.css        — cyberpunk styling, scanlines, popup
 js/
   lib/three.js    — Three.js re-export (change CDN/version here)
   config.js       — ★ all chips, paths, popup data (edit me)
-  scene.js        — renderer, isometric camera, lights, PCB
+  scene.js        — renderer, camera, lights, PCB substrate
   components.js   — CPU + chip mesh builders (visual types)
-  paths.js        — trace builder + glow shader
+  paths.js        — interactive trace builder + glow shader
+  circuitry.js    — ambient decorative PCB detail (buses, stubs, SMDs)
   ui.js           — raycaster, popup, HUD clock
   main.js         — wires everything together
 ```

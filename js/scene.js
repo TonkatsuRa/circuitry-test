@@ -26,18 +26,19 @@ export function createScene(mountEl) {
   scene.background = new THREE.Color(PALETTE.pcb);
   scene.fog = new THREE.Fog(PALETTE.pcb, 25, 55);
 
-  // ─── ISOMETRIC ORTHOGRAPHIC CAMERA ─────────────────────
-  // Classic isometric: equal X/Y/Z position gives ~35° elevation.
-  // The frustum is sized so the PCB always fits regardless of aspect ratio
-  // (portrait mobile included). `cameraZoom` is the half-extent in whichever
-  // screen dimension is shorter.
+  // ─── ORTHOGRAPHIC CAMERA — STEEP ANGLE ─────────────────
+  // Position is set for ~58° elevation (between isometric 35° and top-down 90°).
+  // Maintains a 45° rotation around the vertical axis so the PCB sits as a
+  // diamond on screen, but tilts much further forward than classic isometric.
+  // The frustum auto-sizes to whichever screen dimension is shorter, so the
+  // PCB always fits regardless of aspect ratio (portrait mobile included).
   const frustum = computeFrustum(window.innerWidth / window.innerHeight);
   const camera = new THREE.OrthographicCamera(
     -frustum.halfW, frustum.halfW,
      frustum.halfH, -frustum.halfH,
      0.1, 200
   );
-  camera.position.set(20, 22, 20);
+  camera.position.set(12, 28, 12);
   camera.lookAt(0, 0, 0);
   camera.updateProjectionMatrix();
 
@@ -150,7 +151,7 @@ function buildPCB() {
     new THREE.Float32BufferAttribute(verts, 3)
   );
   const gridMat = new THREE.LineBasicMaterial({
-    color: PALETTE.pcbAccent, transparent: true, opacity: 0.35,
+    color: PALETTE.pcbAccent, transparent: true, opacity: 0.15,
   });
   group.add(new THREE.LineSegments(gridGeo, gridMat));
 

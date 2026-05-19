@@ -16,26 +16,29 @@
  */
 
 export const PALETTE = {
-  pcb:        0x081512,   // dark green-black PCB substrate
-  pcbAccent:  0x0d2a25,   // slightly lighter for surface detail
-  traceBase:  0x0a3b34,   // dim trace color (unlit)
-  traceLit:   0x00ffe5,   // cyan when active
-  cpuBody:    0x14181c,
-  cpuPlate:   0x202830,
-  cpuCore:    0xff2bd2,   // magenta core glow
-  chipDark:   0x0a0e10,
-  chipMid:    0x1a2228,
-  goldPin:    0xc99b3a,
-  silicon:    0x0e1014,
-  amber:      0xffb000,
+  pcb:           0x081512,   // dark green-black PCB substrate
+  pcbAccent:     0x0d2a25,   // slightly lighter for surface detail
+  traceBase:     0x0a3b34,   // dim trace color (bus / branch stubs)
+  traceDim:      0x051a17,   // very dim — random background fragments
+  traceMainBase: 0x0e554d,   // unlit primary trace (brighter than bus)
+  traceLit:      0x00ffe5,   // cyan when active
+  viaDim:        0x008275,   // medium-bright cyan for via dots
+  cpuBody:       0x14181c,
+  cpuPlate:      0x202830,
+  cpuCore:       0xff2bd2,   // magenta core glow
+  chipDark:      0x0a0e10,
+  chipMid:       0x1a2228,
+  goldPin:       0xc99b3a,
+  silicon:       0x0e1014,
+  amber:         0xffb000,
 };
 
 export const SCENE_CONFIG = {
   pcbSize:        24,           // PCB extends -12 to +12
   pcbThickness:   0.3,
-  traceHeight:    0.08,         // how thick traces are
-  traceWidth:     0.18,
-  cameraZoom:     18,           // ortho half-extent in the shorter screen dim
+  traceHeight:    0.10,         // main trace dimensions
+  traceWidth:     0.22,
+  cameraZoom:     14,           // ortho half-extent in shorter screen dim (smaller = closer)
   fillDuration:   1.4,          // seconds for full path to light up
   popupDelay:     0.15,         // seconds after fill completes
   enableScanlines:true,
