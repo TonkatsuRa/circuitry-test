@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>CIRCUIT::GRID // SYS_LINK</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Share+Tech+Mono&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- ES module imports for Three.js (works on GitHub Pages or local server) -->
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
+        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
+      }
+    }
+  </script>
+</head>
+<body>
+  <!-- 3D canvas mount point -->
+  <div id="scene-root"></div>
+
+  <!-- HUD overlay (decorative cyberpunk frame) -->
+  <div class="hud">
+    <div class="hud-corner hud-tl">
+      <span class="hud-tag">SYS::CIRCUIT_GRID</span>
+      <span class="hud-sub">v2.4.7 // LINK_ACTIVE</span>
+    </div>
+    <div class="hud-corner hud-tr">
+      <span class="hud-tag" id="hud-clock">--:--:--</span>
+      <span class="hud-sub">UTC.SYNC</span>
+    </div>
+    <div class="hud-corner hud-bl">
+      <span class="hud-tag">NODE::CORE_0x01</span>
+      <span class="hud-sub">TAP A MODULE TO PROBE</span>
+    </div>
+    <div class="hud-corner hud-br">
+      <span class="hud-tag" id="hud-status">IDLE</span>
+      <span class="hud-sub">DIAGNOSTIC.MODE</span>
+    </div>
+  </div>
+
+  <!-- Scanline + grain overlay -->
+  <div class="scanlines"></div>
+  <div class="vignette"></div>
+
+  <!-- Popup modal -->
+  <div class="popup-backdrop" id="popup-backdrop" aria-hidden="true">
+    <div class="popup" role="dialog" aria-modal="true" aria-labelledby="popup-title">
+      <div class="popup-frame-corner tl"></div>
+      <div class="popup-frame-corner tr"></div>
+      <div class="popup-frame-corner bl"></div>
+      <div class="popup-frame-corner br"></div>
+
+      <header class="popup-header">
+        <div class="popup-id" id="popup-id">--</div>
+        <button class="popup-close" id="popup-close" aria-label="Close">×</button>
+      </header>
+
+      <h2 class="popup-title" id="popup-title">--</h2>
+      <div class="popup-subtitle" id="popup-subtitle">--</div>
+
+      <div class="popup-body" id="popup-body">
+        <!-- Populated dynamically -->
+      </div>
+
+      <footer class="popup-footer">
+        <span class="popup-status" id="popup-status">● LINK ESTABLISHED</span>
+        <span class="popup-hint">[ESC] DISCONNECT</span>
+      </footer>
+    </div>
+  </div>
+
+  <!-- Loading screen -->
+  <div class="boot" id="boot">
+    <div class="boot-text">
+      <span class="boot-line">> INITIALIZING CIRCUIT_GRID...</span>
+      <span class="boot-line">> LOADING GEOMETRY BUFFERS...</span>
+      <span class="boot-line">> CALIBRATING TRACE NETWORK...</span>
+      <span class="boot-line boot-line-final">> SYSTEM READY_</span>
+    </div>
+  </div>
+
+  <script type="module" src="js/main.js"></script>
+</body>
+</html>
