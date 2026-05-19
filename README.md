@@ -8,29 +8,33 @@ Built with [Three.js](https://threejs.org/) via ES module imports (no build step
 
 ## Running
 
+> **You cannot just double-click `index.html`.** Modern browsers block ES module
+> loading from `file://` URLs for security. The page will appear stuck on the
+> boot screen — it now shows a clear error explaining this. Use one of the
+> options below.
+
 ### Option A — GitHub Pages (recommended)
 
 1. Push this folder to a repo.
 2. Repo → **Settings** → **Pages** → deploy from the `main` branch root.
 3. Open the URL GitHub gives you. Done.
 
-### Option B — Locally
+### Option B — Local HTTP server
 
-ES modules can't be loaded directly from `file://` URLs, so you need a local
-HTTP server. Pick one:
+From inside the `circuit-grid/` folder, pick any of these:
 
 ```bash
-# Python (built into macOS / most Linux distros)
+# Python 3 (built into macOS and most Linux distros)
 python3 -m http.server 8000
 
-# Node
+# Node (no install needed if you have npx)
 npx serve .
 
 # PHP
 php -S localhost:8000
 ```
 
-Then open `http://localhost:8000` in your browser.
+Then open <http://localhost:8000> in your browser.
 
 ## File layout
 

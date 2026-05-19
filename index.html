@@ -79,13 +79,92 @@
 
   <!-- Loading screen -->
   <div class="boot" id="boot">
-    <div class="boot-text">
+    <div class="boot-text" id="boot-text">
       <span class="boot-line">> INITIALIZING CIRCUIT_GRID...</span>
       <span class="boot-line">> LOADING GEOMETRY BUFFERS...</span>
       <span class="boot-line">> CALIBRATING TRACE NETWORK...</span>
       <span class="boot-line boot-line-final">> SYSTEM READY_</span>
     </div>
   </div>
+
+  <!--
+    PRE-FLIGHT CHECK — classic script that runs even when ES modules can't.
+    Detects file:// usage (modules are blocked there by browser security)
+    and surfaces any uncaught script errors as a clear message on the boot
+    screen, so failures don't appear as a stuck "SYSTEM READY_".
+  -->
+  <script>
+    (function () {
+      function showFatal(title, lines) {
+        var boot = document.getElementById('boot');
+        if (!boot) return;
+        boot.classList.add('boot-error');
+        var html =
+          '<div class="boot-text">' +
+            '<span class="boot-line boot-err">> ' + title + '</span>';
+        for (var i = 0; i < lines.length; i++) {
+          html += '<span class="boot-line">> ' + lines[i] + '</span>';
+        }
+        html += '</div>';
+        boot.innerHTML = html;
+      }
+
+      // ES modules cannot load from file:// in any modern browser.
+      if (location.protocol === 'file:') {
+        document.addEventListener('DOMContentLoaded', function () {
+          showFatal('FILE:// PROTOCOL DETECTED', [
+            'ES MODULES ARE BLOCKED FROM LOCAL FILES.',
+            '',
+            'RUN A LOCAL SERVER:',
+            '  python3 -m http.server 8000',
+            '  npx serve .',
+            '',
+            'THEN OPEN http://localhost:8000',
+            '',
+            'OR DEPLOY TO GITHUB PAGES.',
+          ]);
+        });
+        return; // skip the watchdog below
+      }
+
+      // Surface any uncaught script errors on the boot screen so failures
+      // are visible without needing devtools open.
+      window.addEventListener('error', function (e) {
+        if (document.getElementById('boot')?.classList.contains('fade')) return;
+        showFatal('RUNTIME ERROR', [
+          (e.message || 'Unknown error').toUpperCase(),
+          e.filename ? 'IN: ' + e.filename.split('/').pop() : '',
+          'CHECK BROWSER CONSOLE FOR DETAILS.',
+        ].filter(Boolean));
+      });
+
+      window.addEventListener('unhandledrejection', function (e) {
+        if (document.getElementById('boot')?.classList.contains('fade')) return;
+        showFatal('PROMISE REJECTION', [
+          String(e.reason && e.reason.message || e.reason || 'unknown').toUpperCase(),
+          'CHECK BROWSER CONSOLE FOR DETAILS.',
+        ]);
+      });
+
+      // Watchdog — if main.js hasn't signalled it's running after 5s,
+      // something went wrong (module load failure, CDN issue, etc).
+      window.__circuitBooted = false;
+      setTimeout(function () {
+        if (window.__circuitBooted) return;
+        if (!document.getElementById('boot')) return;
+        showFatal('STARTUP TIMEOUT', [
+          'MAIN MODULE FAILED TO LOAD.',
+          '',
+          'LIKELY CAUSES:',
+          '  • THREE.JS CDN UNREACHABLE',
+          '  • NETWORK BLOCKED',
+          '  • ES MODULES NOT SUPPORTED',
+          '',
+          'OPEN DEVTOOLS CONSOLE FOR DETAILS.',
+        ]);
+      }, 5000);
+    })();
+  </script>
 
   <script type="module" src="js/main.js"></script>
 </body>

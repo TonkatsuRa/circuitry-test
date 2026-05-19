@@ -74,8 +74,10 @@ function animate() {
 animate();
 
 /* ─── HIDE BOOT SCREEN AFTER A BEAT ──────────────────── */
+window.__circuitBooted = true;
 setTimeout(() => {
   const boot = document.getElementById('boot');
+  if (!boot || boot.classList.contains('boot-error')) return;
   boot.classList.add('fade');
   setTimeout(() => boot.remove(), 700);
 }, 1500);
