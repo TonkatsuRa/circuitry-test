@@ -3,7 +3,7 @@
  * Wire it once and it handles the whole interaction lifecycle.
  */
 
-import * as THREE from 'three';
+import * as THREE from './lib/three.js';
 
 export class InteractionController {
   constructor({ scene, camera, renderer, chipMeshes, paths, onChipSelected }) {

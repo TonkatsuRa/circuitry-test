@@ -3,7 +3,7 @@
  * Orchestrates the scene, components, paths, and UI.
  */
 
-import * as THREE from 'three';
+import * as THREE from './lib/three.js';
 import { COMPONENTS } from './config.js';
 import { createScene } from './scene.js';
 import { buildCPU, buildChip } from './components.js';

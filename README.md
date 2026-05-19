@@ -39,9 +39,10 @@ Then open <http://localhost:8000> in your browser.
 ## File layout
 
 ```
-index.html        — shell, HUD overlay, popup markup
+index.html        — shell, HUD overlay, popup markup, boot screen
 styles.css        — cyberpunk styling, scanlines, popup
 js/
+  lib/three.js    — Three.js re-export (change CDN/version here)
   config.js       — ★ all chips, paths, popup data (edit me)
   scene.js        — renderer, isometric camera, lights, PCB
   components.js   — CPU + chip mesh builders (visual types)

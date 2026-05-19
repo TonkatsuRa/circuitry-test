@@ -12,15 +12,14 @@
   />
   <link rel="stylesheet" href="styles.css" />
 
-  <!-- ES module imports for Three.js (works on GitHub Pages or local server) -->
-  <script type="importmap">
-    {
-      "imports": {
-        "three": "https://unpkg.com/three@0.160.0/build/three.module.js",
-        "three/addons/": "https://unpkg.com/three@0.160.0/examples/jsm/"
-      }
-    }
-  </script>
+  <!-- Preload Three.js so the network fetch starts immediately while the
+       rest of the page parses. The shim in js/lib/three.js re-exports from
+       this same URL. -->
+  <link
+    rel="modulepreload"
+    href="https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js"
+    crossorigin="anonymous"
+  />
 </head>
 <body>
   <!-- 3D canvas mount point -->
@@ -146,7 +145,7 @@
         ]);
       });
 
-      // Watchdog — if main.js hasn't signalled it's running after 5s,
+      // Watchdog — if main.js hasn't signalled it's running after 10s,
       // something went wrong (module load failure, CDN issue, etc).
       window.__circuitBooted = false;
       setTimeout(function () {
@@ -162,7 +161,7 @@
           '',
           'OPEN DEVTOOLS CONSOLE FOR DETAILS.',
         ]);
-      }, 5000);
+      }, 10000);
     })();
   </script>
 

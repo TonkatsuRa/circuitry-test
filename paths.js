@@ -11,7 +11,7 @@
  * dependency on BufferGeometryUtils — fewer things that can fail.
  */
 
-import * as THREE from 'three';
+import * as THREE from './lib/three.js';
 import { PALETTE, SCENE_CONFIG } from './config.js';
 
 /* ─── SHADERS ────────────────────────────────────────── */

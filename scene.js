@@ -3,7 +3,7 @@
  * Exposes `createScene()` returning everything `main.js` needs to run the loop.
  */
 
-import * as THREE from 'three';
+import * as THREE from './lib/three.js';
 import { PALETTE, SCENE_CONFIG } from './config.js';
 
 export function createScene(mountEl) {

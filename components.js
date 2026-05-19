@@ -6,7 +6,7 @@
  * Adding a new visual type? Add a new case in `buildChip()`.
  */
 
-import * as THREE from 'three';
+import * as THREE from './lib/three.js';
 import { PALETTE } from './config.js';
 
 /* ─── CENTRAL CPU ────────────────────────────────────── */
